@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase-messaging.js"></script>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+<script>
+
+</script>
+
+
+  
+</head>
+<body>
+
+  <form>
+    <input type = "email" placeholder="Enter an email" ><br/>
+    <input type = "password" >
+    <br/>
+    <button type = "submit">Submit</button>
+  </form>
+  <br/><br/>
+  <button id="push-button" disabled>Subscribe</button>
+  <button onclick="sendnotification()">Send notification</button>
+
+  <form action="#">
+    <input id="input-title">
+    <label for="input-title">Post Title</label>
+    <button type="submit" id="add-post">Add Post</button>
+  </form>
+  
+  <ul id="list"></ul>
+  <div id="snackbar" class="mdl-js-snackbar mdl-snackbar">
+    <div class="mdl-snackbar__text"></div>
+    <button class="mdl-snackbar__action" type="button"></button>
+  </div>
+
+
+
+  <script src="jquery-1.11.3.min.js"></script>
+
+  <script src="main.js"></script>
+<script>
+ 
+  messaging.onMessage(function(payload) {
+  console.log('Message received. ', payload);
+  // ...
+
+});
+
+function sendnotification(){
+  $.ajax({
+    url: 'https://fcm.googleapis.com/fcm/send',
+    headers: {
+      
+       "Authorization": "key=AAAAYOeLKTI:APA91bGuvyU56hemXYxtnH8Jy7Zg5XlSMIUqsXI6d9uP1uGIcvnAaP8ZgZAE-P4d2YKkyHVJuAo85cV3QSs8GZXlHV95KA4ccsYRcWKnmhSqjSx6RmysSCrod9F_v1Uehh9XElukVmqkoXTDEBNPBwXL6Ft8zA1Tdw" ,
+   
+        'Content-Type':'application/json'
+    },
+    method: 'POST',
+    dataType: 'json',
+    data:  
+      JSON.stringify({"to": "e4RhyQ9BQuE:APA91bEjNSDM9LZPKV7PsMF8UYzFnXx1ZRXFM_9lYoU6GgeQmTf_vI3kPjEcdfVGLxWht4G815_tOpZAL17kwaPqCIPIC3ipwRB6oQBo79fu-B2wPqjZtJmcYq_IUYx4AlseUhn6WdZo",
+      "notification" : {
+              "title": "Hello",
+              "body" : "worldsss",
+              },
+            }),
+    success: function(data ){
+      console.log('success: ' , data );
+    }
+  });
+}
+
+
+
+
+</script>
+</body>
+</html>
